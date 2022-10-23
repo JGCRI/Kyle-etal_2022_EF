@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queries>
+  <!--aQuery>
+    <supplyDemandQuery title="fertilizer consumption by ag tech">
+        <axis1 name="sector">sector</axis1>
+        <axis2 name="Year">demand-physical[@vintage]</axis2>
+        <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector' and not (@name='Exports_fertilizer')]/
+   *[@type='subsector']/*[@type='technology']/*[@type='input' and (@name='N fertilizer')]/demand-physical/node()</xPath>
+        <comments/>
+    </supplyDemandQuery>
+</aQuery>
+<aQuery>
+  <supplyDemandQuery title="fertilizer consumption by crop type">
+      <axis1 name="sector">sector</axis1>
+      <axis2 name="Year">demand-physical[@vintage]</axis2>
+      <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector' and not (@name='Exports_N fertilizer')]//
+ *[@type='input' and (@name='N fertilizer')]/demand-physical/node()</xPath>
+      <comments/>
+  </supplyDemandQuery>
+</aQuery>
+<aQuery>
+  <supplyDemandQuery title="P_fertilizer consumption by crop type">
+    <axis1 name="sector">sector</axis1>
+    <axis2 name="Year">demand-physical[@vintage]</axis2>
+    <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector']//
+               *[@type='input' and (@name='P_fertilizer')]/demand-physical/node()</xPath>
+    <comments/>
+</supplyDemandQuery>
+</aQuery>
+<aQuery>
+  <supplyDemandQuery title="P fertilizer consumption by ag tech">
+      <axis1 name="sector">sector</axis1>
+      <axis2 name="Year">demand-physical[@vintage]</axis2>
+      <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector']/
+                 *[@type='subsector']/*[@type='technology']/*[@type='input' and (@name='P_fertilizer')]/demand-physical/node()</xPath>
+      <comments/>
+  </supplyDemandQuery>
+</aQuery>
+<aQuery>
+  <supplyDemandQuery title="ag production by crop type">
+      <axis1 name="sector">sector[@name]</axis1>
+      <axis2 name="Year">physical-output[@vintage]</axis2>
+      <xPath buildList="true" dataName="output" group="false" sumAll="false">*[@type='sector' and (local-name()='AgSupplySector')]//
+output-primary/physical-output/node()</xPath>
+      <comments>primary output only (no residue biomass)</comments>
+  </supplyDemandQuery>
+</aQuery>
+<aQuery>
+  <supplyDemandQuery title="ag production by subsector (land use region)">
+      <axis1 name="technology">technology[@name]</axis1>
+      <axis2 name="Year">physical-output[@vintage]</axis2>
+      <xPath buildList="true" dataName="output" group="false" sumAll="false">*[@type='sector' and (local-name()='AgSupplySector')]/*[@type='subsector']//output-primary/physical-output/node()</xPath>
+      <comments>primary output only (no residue biomass)</comments>
+  </supplyDemandQuery>
+</aQuery>
+<aQuery>
+  <resourceQuery title="Basin level available runoff">
+      <axis1 name="Basin">resource[@name]</axis1>
+      <axis2 name="Year">max-annual-subresource[@year]</axis2>
+      <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type = 'resource' and contains(@name, 'water withdrawals')]/*[@type = 'subresource' and contains(@name, 'runoff')]/max-annual-subresource/node()</xPath>
+      <comments/>
+  </resourceQuery>
+</aQuery>
+<aQuery>
+  <query title="detailed land allocation">
+      <axis1 name="LandLeaf">LandLeaf[@name]</axis1>
+      <axis2 name="Year">land-allocation[@year]</axis2>
+      <xPath buildList="true" dataName="LandLeaf" group="false" sumAll="false">/LandNode[@name='root' or @type='LandNode' (:collapse:)]//land-allocation/text()</xPath>
+      <comments/>
+  </query>
+</aQuery>
+<aQuery>
+  <query title="land allocation by crop">
+      <axis1 name="LandLeaf">LandLeaf[@crop]</axis1>
+      <axis2 name="Year">land-allocation[@year]</axis2>
+      <xPath buildList="true" dataName="LandLeaf" group="false" sumAll="false">/LandNode[@name='root' or @type='LandNode' (:collapse:)]//land-allocation/text()</xPath>
+      <comments/>
+  </query>
+</aQuery>
+<aQuery>
+  <supplyDemandQuery title="irrigation water withdrawals by crop type and land region">
+    <axis1 name="sector">sector</axis1>
+    <axis2 name="Year">demand-physical[@vintage]</axis2>
+    <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector']/*[@type='subsector']//*[@type='input' and contains(@name, 'water_td_irr')
+               and ends-with(@name, '_W')]/demand-physical/node()</xPath>
+    <comments/>
+</supplyDemandQuery>
+</aQuery>
+<aQuery>
+  <supplyDemandQuery title="water withdrawals for irrigation">
+      <axis1 name="input">input</axis1>
+      <axis2 name="Year">demand-physical[@vintage]</axis2>
+      <xPath buildList="true" dataName="input" group="false" sumAll="false">*[@type='sector' (:collapse:) and not(contains(@name, 'water_td_irr'))]//*[@type='input' and contains(@name,'water_td')
+   and ends-with(@name,'_W')]/demand-physical/node()</xPath>
+      <comments/>
+  </supplyDemandQuery>
+</aQuery>
+<aQuery>
+<supplyDemandQuery title="ag commodity prices">
+    <axis1 name="sector">sector</axis1>
+    <axis2 name="Year">cost</axis2>
+    <xPath buildList="true" dataName="price" group="false" sumAll="false">*[@type='sector' and (local-name()='AgSupplySector')]/cost/text()</xPath>
+    <comments/>
+</supplyDemandQuery>
+</aQuery>
+<aQuery>
+  <gdpQueryBuilder title="GDP MER by region">
+      <axis1 name="region">region</axis1>
+      <axis2 name="Year">gdp-mer</axis2>
+      <xPath buildList="true" dataName="gdp-mer" group="false" sumAll="false">GDP/gdp-mer/text()</xPath>
+      <comments/>
+  </gdpQueryBuilder>
+</aQuery>
+<aQuery>
+  <gdpQueryBuilder title="GDP per capita PPP by region">
+    <axis1 name="region">region</axis1>
+    <axis2 name="Year">gdp-per-capita-ppp</axis2>
+    <xPath buildList="true" dataName="gdp-per-capita-ppp" group="false" sumAll="false">GDP/gdp-per-capita-ppp/text()</xPath>
+    <comments/>
+</gdpQueryBuilder>
+</aQuery>
+<aQuery>
+  <demographicsQuery title="population by region">
+    <axis1 name="region">region</axis1>
+    <axis2 name="Year">populationMiniCAM</axis2>
+    <xPath buildList="true" dataName="total-population" group="false" sumAll="false">demographics/populationMiniCAM/total-population/node()</xPath>
+    <comments/>
+</demographicsQuery>
+</aQuery>
+  <aQuery>
+    <supplyDemandQuery title="meat and dairy production by type">
+       <axis1 name="sector">sector</axis1>
+       <axis2 name="Year">physical-output[@vintage]</axis2>
+       <xPath buildList="true" dataName="output" group="false" sumAll="false">*[@type='sector' and
+       (@name='Beef' or @name='SheepGoat' or @name='Pork' or @name='Dairy' or @name='Poultry' or @name='OtherMeat_Fish')]//
+       *[@type='output']/physical-output/node()</xPath>
+       <comments/>
+    </supplyDemandQuery>
+  </aQuery>
+  <aQuery>
+    <supplyDemandQuery title="meat and dairy prices">
+       <axis1 name="sector">sector</axis1>
+       <axis2 name="Year">cost</axis2>
+       <xPath buildList="true" dataName="output" group="false" sumAll="false">*[@type='sector' and
+       (@name='Beef' or @name='SheepGoat' or @name='Pork' or @name='Dairy' or @name='Poultry'or @name='OtherMeat_Fish')]/
+       cost/text()</xPath>
+       <comments/>
+    </supplyDemandQuery>
+  </aQuery>
+  <aQuery>
+	<supplyDemandQuery title="food consumption by type (specific)">
+    	<axis1 name="technology">technology</axis1>
+    	<axis2 name="Year">physical-output[@vintage]</axis2>
+    	<xPath buildList="true" dataName="output" group="false" sumAll="false">*[@type='sector' and (@name='FoodDemand_Staples' or @name='FoodDemand_NonStaples')]//
+    	        *[@type='subsector']//*[@type='technology']/
+    	        *[@type='output' (:collapse:)]/physical-output/node()</xPath>
+    	<comments/>
+	</supplyDemandQuery>
+</aQuery>
+<aQuery>
+  <supplyDemandQuery title="meat and dairy production by tech">
+      <axis1 name="sector">sector</axis1>
+      <axis2 name="Year">physical-output[@vintage]</axis2>
+      <xPath buildList="true" dataName="output" group="false" sumAll="false">*[@type='sector' and
+ (@name='Beef' or @name='SheepGoat' or @name='Pork' or @name='Dairy' or @name='Poultry')]/
+ *[@type='subsector']/*[@type='technology']//
+ *[@type='output']/physical-output/node()</xPath>
+      <comments/>
+  </supplyDemandQuery>
+</aQuery-->
+<aQuery>
+  <supplyDemandQuery title="traded outputs by subsector">
+      <axis1 name="sector">sector[@name]</axis1>
+      <axis2 name="Year">physical-output[@vintage]</axis2>
+      <xPath buildList="true" dataName="output" group="false" sumAll="false">*[@type='sector' and contains(@name, 'traded') or contains(@name,'regional')]/*[@type='subsector']//*[@type='output']/physical-output/node()</xPath>
+      <comments/>
+  </supplyDemandQuery>
+</aQuery>
+</queries>

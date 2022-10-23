@@ -139,6 +139,12 @@ dmypy.json
 # ---- R ----
 # -----------
 
+#Custom Folders
+/inputs
+/outdata
+*.bak
+README_SAM.md
+
 # ignore path
 /bak
 
