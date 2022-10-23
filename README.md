@@ -71,6 +71,7 @@ Follow the steps below to set up the directory and recreate the results and figu
 The `R` folder contains the scripts, which are described here, in the order that they would be run in order to generate the plots.
 
 | Script Name | Description |
+| --- | --- |
 | `db_extract.R`: 	 |	This is used to query data from a GCAM output database, saving the output of the queries into `outdata/SAM-matrix.dat`. It is only necessary if the scenarios are being re-run. |
 | `proj_load.R`: 		 |	This loads the project, creates important strings used in other scripts, and links necessary file paths.  |
 | `figure2_plots.R`: 	 |	This is used to generate the 4 panels of Figure 2 in the paper |
