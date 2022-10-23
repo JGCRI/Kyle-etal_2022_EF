@@ -4,13 +4,13 @@ _your zenodo badge here_
 
 **Assessing Multi-Dimensional Impacts of Achieving Sustainability Goals by Projecting the Sustainable Agriculture Matrix into the Future**
 
-Page Kyle<sup>1\*</sup>, Mary Ollenburger<sup>2, Xin Zhang<sup>2, Hassan Niazi<sup>1\, Siddarth Durga<sup>1, and Yang Ou<sup>1
+Page Kyle<sup>1\*</sup>, Mary Ollenburger<sup>2</sup>, Xin Zhang<sup>2</sup>, Hassan Niazi<sup>1</sup>, Siddarth Durga<sup>1</sup>, and Yang Ou<sup>1</sup>
 
-<sup>1 </sup> Joint Global Change Research Institute, Pacific Northwest National Laboratory and University of Maryland, College Park, MD, USA
+<sup>1 </sup> Joint Global Change Research Institute, Pacific Northwest National Laboratory (JGCRI-PNNL), College Park, MD, USA
 
 <sup>2 </sup> Appalachian Laboratory, University of Maryland Center for Environmental Science (UMCES), Frostburg, MD, USA
 
-\* corresponding author:  pkyle@pnnl.gov
+\* corresponding author: pkyle@pnnl.gov
 
 ## Abstract
 In this paper sustainable agriculture matrix (SAM) is estimated to 2100 in GCAM. We model combinatorial variations of yield intensification, dietary shift, and greenhouse gas mitigation scenarios. Findings include scenarios having significant environmental, economic, and social tradeoffs. Assessment of these tradeoffs in a consistent framework improves the quality of information for decision-making.
@@ -36,21 +36,16 @@ Human, I.M. (2021, April 14). Project/repo:v0.1.0 (Version v0.1.0). Zenodo. http
 ### Input data
 `inputs` folder on zenodo. Link here. 
 
-
 %%%%%%%%%%%% delete the following later
 
-Reference for each minted data source for your input data.  For example:
-
-Human, I.M. (2021). My input dataset name [Data set]. DataHub. https://doi.org/some-doi-number
+Reference for each minted data source for your input data.  For example: Human, I.M. (2021). My input dataset name [Data set]. DataHub. https://doi.org/some-doi-number
 
 ### Output data
 `outdata` folder on zenodo. Link here. 
 
 %%%%%%%%%%%% delete the following later
 
-Reference for each minted data source for your output data.  For example:
-
-Human, I.M. (2021). My output dataset name [Data set]. DataHub. https://doi.org/some-doi-number
+Reference for each minted data source for your output data.  For example: Human, I.M. (2021). My output dataset name [Data set]. DataHub. https://doi.org/some-doi-number
 
 ## Contributing modeling software
 
@@ -63,7 +58,7 @@ Human, I.M. (2021). My output dataset name [Data set]. DataHub. https://doi.org/
 Follow the steps below to set up the directory and recreate the results and figures of this study. Place folders using specified names on specified paths to run the code scripts smoothly. 
 
 1. Install the software components required to conduct the experiment from [Contributing modeling software](#contributing-modeling-software)
-2. Download the supporting input data from [Input data](#input-data), and place here: `/inputs/'
+2. Download the supporting input data from [Input data](#input-data), and place here: `/inputs/`
 3. The `inputs` folder conducts pre-processing of external data which is read by the main `R/` folder of the module. The data in this folder are generic to all scenarios in this study. It isn't expected that users would need to re-run the scripts in the `inputs/R` folder but they are provided just in case.
 4. Download and unzip the output data from my experiment [Output data](#output-data) and place here: `/outdata/`.
 5. Open the `output_processing.Rproj` file (RStudio project file) to access all R code files used to generate the data and figures. Make sure to install and load all R packages required to run scripts in `R` directory. 
