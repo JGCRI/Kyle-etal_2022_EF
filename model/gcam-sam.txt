@@ -1,0 +1,1 @@
+Model: https://github.com/pkyle/gcam-core/tree/gpk/paper/sam
