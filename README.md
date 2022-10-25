@@ -13,7 +13,7 @@ Page Kyle<sup>1\*</sup>, Mary Ollenburger<sup>2</sup>, Xin Zhang<sup>2</sup>, Ha
 \* corresponding author: pkyle@pnnl.gov
 
 ## Abstract
-In this paper sustainable agriculture matrix (SAM) is estimated to 2100 in GCAM. We model combinatorial variations of yield intensification, dietary shift, and greenhouse gas mitigation scenarios. Findings include scenarios having significant environmental, economic, and social tradeoffs. Assessment of these tradeoffs in a consistent framework improves the quality of information for decision-making.
+In this paper sustainable agriculture matrix (SAM) is estimated to 2100 using Global Change Analysis Model (GCAM). We model combinatorial variations of yield intensification, dietary shift, and greenhouse gas mitigation scenarios. Findings include scenarios having significant tradeoffs across multiple environmental, economic, and social dimensions. Assessment of these multi-dimensional tradeoffs in a consistent framework improves the quality of information for decision-making.
 
 ## Journal reference
 To be provided after publication. 
@@ -51,12 +51,12 @@ The `R` folder contains the scripts, which are described here, in the order that
 
 | Script Name | Description |
 | --- | --- |
-| `db_extract.R`: 	 |	This is used to query data from a GCAM output database, saving the output of the queries into `outdata/SAM-matrix.dat`. It is only necessary if the scenarios are being re-run. |
-| `proj_load.R`: 		 |	This loads the project, creates important strings used in other scripts, and links necessary file paths.  |
-| `figure2_plots.R`: 	 |	This is used to generate the 4 panels of Figure 2 in the paper |
-| `maps_indicators.R`: |	This runs all of the data processing code, saves the condensed indicators as `outdata/region_vals.csv`, and generates map figures for each of the 32 GCAM regions. Note, `outdata/region_vals.csv` could be directly read-in to plot all figures in the study (both main text and SI), instead of sourcing all processing scripts (`R/landuse.R`, `R/nutbal.R`, `R/water.R`, `R/ghg_emissions.R`, `R/ag_an_markets.R`, `R/food_afford_refdiet.R`) every time. |
+| `db_extract.R` 	 |	This is used to query data from a GCAM output database, saving the output of the queries into `outdata/SAM-matrix.dat`. It is only necessary if the scenarios are being re-run. |
+| `proj_load.R` 		 |	This loads the project, creates important strings used in other scripts, and links necessary file paths.  |
+| `figure2_plots.R` 	 |	This is used to generate the 4 panels of Figure 2 in the paper |
+| `maps_indicators.R` |	This runs all of the data processing code, saves the condensed indicators as `outdata/region_vals.csv`, and generates map figures for each of the 32 GCAM regions. Note, `outdata/region_vals.csv` could be directly read-in to plot all figures in the study (both main text and SI), instead of sourcing all processing scripts (`R/landuse.R`, `R/nutbal.R`, `R/water.R`, `R/ghg_emissions.R`, `R/ag_an_markets.R`, `R/food_afford_refdiet.R`) every time. |
 | `SAM_plots.R`		|	This produces Figure 3 of the paper which shows the fraction of global population experiencing various SAM thresholds. |			 
-| `transformations.R`: |	This generates the radar plots in Figure 4 of the paper using `outdata/region_vals.csv` |
+| `transformations.R` |	This generates the radar plots in Figure 4 of the paper using `outdata/region_vals.csv` |
 | `probsustainabilityscore.R`	| This script aggregates results in `outdata/region_vals.csv` assuming all indicators and scenarios weigh the same, and produces sustainability score maps as shown in Figure 5 of the paper.		|
 | `extrafigures.R`	 |	This generates plots presented in supplementary information of the paper.|
 
