@@ -35,6 +35,7 @@ Download `outdata` folder from [![DOI](https://zenodo.org/badge/DOI/10.5281/zeno
 | Model | Version | Repository Link | DOI |
 |-------|---------|-----------------|-----|
 | GCAM | v6 | https://github.com/pkyle/gcam-core/tree/gpk/paper/sam | *[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7251099.svg)](https://doi.org/10.5281/zenodo.7251099) |
+
 *Static version of the model used to simulate 8 scenarios. See the GCAM-SAM repository (https://github.com/pkyle/gcam-core/tree/gpk/paper/sam) to follow active development of this model. 
 
 ## Reproduce my experiment
