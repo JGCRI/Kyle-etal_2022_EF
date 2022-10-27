@@ -1,1 +1,1 @@
-Model: https://github.com/pkyle/gcam-core/tree/gpk/paper/sam
+See live version of the GCAM-SAM Model here: https://github.com/pkyle/gcam-core/tree/gpk/paper/sam

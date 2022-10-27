@@ -142,8 +142,10 @@ dmypy.json
 #Custom Folders
 /inputs
 /outdata
+/model/gcam-core/
 *.bak
 README_SAM.md
+*.7z
 
 # ignore path
 /bak

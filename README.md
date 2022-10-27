@@ -1,4 +1,4 @@
-_your zenodo badge here_
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7251099.svg)](https://doi.org/10.5281/zenodo.7251099)
 
 # Kyle-etal_2022_EF
 
@@ -22,21 +22,20 @@ To be provided after publication.
 Code reference for the post-processing module. See release details. Include code citation, see meta repo as a reference and guidance on release and code citations. 
 
 ## Data reference
+Kyle, Page, Ollenburger, Mary, Zhang, Xin, Niazi, Hassan, Durga, Siddarth, & Ou, Yang. (2022). Dataset for Assessing Multi-Dimensional Impacts of Achieving Sustainability Goals by Projecting the Sustainable Agriculture Matrix into the Future (v0_InitialSetup) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.7251099
 
 ### Input data
-Place `inputs` folder on zenodo. Link here. Place as `/inputs/` in the directory. Include data citation from zenodo, see meta repo as a reference 
+Download `inputs` folder from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7251099.svg)](https://doi.org/10.5281/zenodo.7251099) and extract in your working directory to appear as `/inputs/` folder. 
 
 ### Output data
-Place `outdata` folder on zenodo. Link here. Place as `/outdata/` in the directory. Include data citation from zenodo, see meta repo as a reference 
+Download `outdata` folder from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7251099.svg)](https://doi.org/10.5281/zenodo.7251099) and extract in your working directory to appear as `/outdata/` folder. 
 
 ## Contributing modeling software
 
-Should we merge gcam-sam branch in `model` folder of this repo? 
-
 | Model | Version | Repository Link | DOI |
 |-------|---------|-----------------|-----|
-| GCAM | v6 | https://github.com/pkyle/gcam-core/tree/gpk/paper/sam | zenodo DOI dataset here |
-
+| GCAM | v6 | https://github.com/pkyle/gcam-core/tree/gpk/paper/sam | *[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7251099.svg)](https://doi.org/10.5281/zenodo.7251099) |
+*Static version of the model used to simulate 8 scenarios. See the GCAM-SAM repository (https://github.com/pkyle/gcam-core/tree/gpk/paper/sam) to follow active development of this model. 
 
 ## Reproduce my experiment
 Follow the steps below to set up the directory and recreate the results and figures of this study. Place folders using specified names on specified paths to run the code scripts smoothly. 
