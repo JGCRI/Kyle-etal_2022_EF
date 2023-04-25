@@ -1,9 +1,21 @@
 # This code file produces the 4-panel Figure 2 (first figure in the results)
+
+library(ggpubr)
+
 Fig2_scenarios <- c("REF", "YLD", "FLX", "CO2")
 scenario_colors <- c(REF = 'black',
-                     YLD = 'green',
+                     YLD = 'green3',
                      FLX = 'orange',
-                     CO2 = 'skyblue')
+                     CO2 = 'skyblue1')
+
+# overwrite model future years only for this script to make the curves more smooth
+# modelfuture=seq(2020,2100,by=5)
+
+#scale_color_manual(values = c("red2","forestgreen","dodgerblue2","purple")) +
+
+# comes from landuse.R but just in case
+# landbycrop<-getQuery(SAMout,"land allocation by crop")  %>%   mutate(landleaf = sub("C4|Tree", "", landleaf))
+
 
 # Figure 2a: total global cropland by scenario
 total_cropland <- filter(landbycrop, landleaf %in% allcrops,
@@ -28,17 +40,25 @@ print(paste0("CO2 cropland delta: ",
                    digits = 3)))
 
 # Generate Figure 2a
-ggplot(total_cropland, aes(x = year, y = value)) +
-  geom_line(aes(color = scenario)) +
+a <- ggplot(total_cropland, aes(x = year, y = value)) +
+  geom_line(aes(color = scenario), size=1.25) +
   scale_color_manual(values = scenario_colors) +
   theme_bw() +
-  xlab("") +
-  ylab("Million km2") +
+  #xlab("") +
+  labs(x="Year",y=expression(paste("Total Cropland (Million ",km^2,")"))) +
+  #ylab"Total Cropland (Million km2)")
   ggtitle("a") +
   theme(plot.title = element_text(vjust = -7, hjust = 0.03)) +
   theme(legend.title = element_blank()) +
-  theme(legend.position = c(0.84, 0.25))
-ggsave("figures/figure2a.png", height = 3.5, width = 3, units = "in")
+  #theme(legend.position = c(0.84, 0.25))+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        #legend.position = 'none',
+        strip.background = element_blank(),
+        strip.text = element_text(face="bold")
+  )
+a
+#ggsave("figures/figure2a.png", height = 3.5, width = 3, units = "in")
 
 # Figure 2b. Radiative forcing by scenario
 forcing <- read_csv("inputs/forcing_total.csv", skip = 1) %>%
@@ -55,17 +75,24 @@ print(paste0("FLX radiative forcing delta: ",
                    digits = 3)))
 
 # Generate Figure 2b
-ggplot(forcing, aes(x = year, y = value)) +
-  geom_line(aes(color = scenario)) +
+b <- ggplot(forcing, aes(x = year, y = value)) +
+  geom_line(aes(color = scenario), size=1.25) +
   scale_color_manual(values = scenario_colors) +
   theme_bw() +
-  xlab("") +
-  ylab("W/m2") +
+  #xlab("") +
+  #ylab("W/m2") +
+  labs(x="Year",y=expression(paste("Radiative Forcing (",W/m^2,")"))) +
   ggtitle("b") +
   theme(plot.title = element_text(vjust = -7, hjust = 0.03)) +
-  theme(legend.title = element_blank()) +
-  theme(legend.position = c(0.84, 0.3))
-ggsave("figures/figure2b.png", height = 3.5, width = 3, units = "in")
+  #theme(legend.title = element_blank()) +
+  theme(legend.position = c(0.84, 0.3),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        #legend.position = 'none',
+        strip.background = element_blank(),
+        strip.text = element_text(face="bold"))
+b
+#ggsave("figures/figure2b.png", height = 3.5, width = 3, units = "in")
 
 # Figure 2c: kcal/pers/d by scenario and food commodity class
 foodcons<-getQuery(SAMout,'food consumption by type (specific)')
@@ -104,23 +131,32 @@ print(paste0("FLX veg protein increase from REF: ",
                    digits = 3)))
 
 # Generate Figure 2c
-ggplot(diet_2050, aes(x = scenario, y = kcal_cap_d)) +
-  geom_bar(stat = "identity", aes(fill = category)) +
+c <- ggplot(diet_2050, aes(x = scenario, y = kcal_cap_d)) +
+  geom_bar(stat = "identity", aes(fill = category), alpha=1) +
+  scale_fill_brewer(palette = "Spectral") +
+  #scale_fill_manual(values = c("red2","forestgreen","dodgerblue2","purple")) +
   theme_bw() +
-  ylab("kcal per capita per day") +
-  xlab("") +
+  ylab("Diet Calories (kcal per capita per day)") +
+  xlab("Scenarios") +
   ggtitle("c") +
   theme(plot.title = element_text(vjust = -7, hjust = 0.03)) +
   theme(legend.title = element_blank()) +
-  theme(axis.text.x = element_text(angle=90))
-ggsave("figures/figure2c.png", height = 4.67, width = 4, units = "in")
+  theme(legend.position = c(0.4, 0),
+        axis.text.x = element_text(angle=00),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        #legend.position = 'bottom',
+        strip.background = element_blank(),
+        strip.text = element_text(face="bold"))
+c
+#ggsave("figures/figure2c.png", height = 4.67, width = 4, units = "in")
 
 # Figure 2d: N fertilizer consumption by scenario
-Nfert_global <-getQuery(SAMout,"fertilizer consumption by crop type") %>%
+Nfert_global <- getQuery(SAMout, "fertilizer consumption by crop type") %>%
   filter(sector != "Exports_fertilizer",
          scenario %in% Fig2_scenarios,
          year %in% modelfuture) %>%
-  group_by(scenario,year) %>%
+  group_by(scenario, year) %>%
   summarise(value = sum(value)) %>%
   ungroup()
 
@@ -135,16 +171,30 @@ print(paste0("FLX Nfert delta from REF: ",
                    digits = 3)))
 
 # Generate Figure 2d
-ggplot(Nfert_global, aes(x = year, y = value)) +
-  geom_line(aes(color = scenario)) +
+d <- ggplot(Nfert_global, aes(x = year, y = value)) +
+  geom_line(aes(color = scenario), size=1.25) +
   scale_color_manual(values = scenario_colors) +
   theme_bw() +
-  xlab("") +
-  ylab("Mt N") +
+  #xlab("") +
+  #ylab("Mt N") +
+  labs(x = "Year", y = expression(paste("Global Nitrogen Fertilizer (Mt N)")))+
   ggtitle("d") +
   theme(plot.title = element_text(vjust = -7, hjust = 0.03)) +
   theme(legend.title = element_blank()) +
-  theme(legend.position = c(0.84, 0.2))
-ggsave("figures/figure2d.png", height = 3.5, width = 3, units = "in")
+  theme(legend.position = c(0.84, 0.2),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        #legend.position = 'none',
+        strip.background = element_blank(),
+        strip.text = element_text(face="bold"))
+#ggsave("figures/figure2d.png", height = 3.5, width = 3, units = "in")
 
+# all legends
+#ggarrange(a,b,c,d, legend="bottom")
 
+# common legend
+legends <- ggarrange(get_legend(c, position = 'bottom'), get_legend(a, position = 'bottom'), nrow = 1)
+plots <- ggarrange(a,b,c,d, common.legend = T, legend="none")
+
+ggpubr::ggarrange(plots, legends, nrow = 2, heights = c(5,0.2))
+#ggsave("figures/figure2_panel_v1.png", height = 8, width = 8, units = "in")
