@@ -19,7 +19,8 @@ SAMout <- loadProject(proj='./outdata/SAM-matrix.dat') # new runs 8 scenarios
 #SAMout_v0<-loadProject(proj='./outdata/SAM-matrix_v0.dat') # old runs 5 scenarios
 
 #gcam_home='~/git/gcam-sam/'
-gcam_home = "/Users/D3P747/Desktop/stash/sam/"
+#gcam_home = "/Users/D3P747/Desktop/stash/sam/"
+gcam_home = "C:/Users/niaz981/Downloads/Modelling/GCAM/gcam-umd-stash-LnDfund/"
 
 ###FILTERS###
 allcrops =c('Corn','FiberCrop','Fruits', 'Legumes','MiscCrop','NutsSeeds','OilCrop','OtherGrain','OilPalm','Rice','RootTuber',
@@ -49,7 +50,7 @@ iso_reg <- read_csv(paste0(gcam_home,"input/gcamdata/inst/extdata/common/iso_GCA
 
 
 #modelfuture=seq(2020,2050,by=10)
-modelfuture=seq(2020,2100,by=10)
+modelfuture = seq(2020,2100,by=10)
 
 gdp_deflator <- function(year, base_year) {
   # This time series is the BEA "A191RD3A086NBEA" product
