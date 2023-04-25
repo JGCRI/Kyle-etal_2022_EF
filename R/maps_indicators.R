@@ -30,8 +30,8 @@ region_vals <- Nsur %>%
                          "Foodafford"="RSE"))
 write_csv(region_vals,'outdata/region_vals.csv')
 
-region_vals<-read_csv('outdata/region_vals.csv')
-SAMthresh<-read_csv('outdata/SAM_thresholds.csv')
+region_vals <- read_csv('outdata/region_vals.csv')
+SAMthresh <- read_csv('outdata/SAM_thresholds.csv')
 
 
 # Uncomment to plot scaled data
@@ -96,9 +96,9 @@ GCAMreg %>% rename("GCAM_30_re"=GCAM_region_ID) %>%
                               "YLD_FLX_CO2"="Combination",
   )) %>%
   #mutate(scenario_long=recode(scenario, PotYld_Diet="Combination", Reference45="Emissions reduction", PotYld="Potential Yield", DietaryTransition="Dietary Transition")) %>%
-  as.data.frame()->share_plot
+  as.data.frame() -> share_plot
 
-share_shape<-merge(regions,share_plot)
+share_shape<-merge(regions, share_plot)
 
 
 
