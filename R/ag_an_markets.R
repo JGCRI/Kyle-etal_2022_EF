@@ -47,8 +47,7 @@ tradesect %>% filter(region == "USA") %>%
   select(-traded, -region)  -> all_traded
 
 all_traded %>%
-  separate(subsector,
-           sep = " ",
+  separate(subsector, sep = " ",
            into = c('first', 'second', 'third', 'fourth')) %>%
   filter(second == "traded") %>%
   rename(region = first) %>%
@@ -110,6 +109,7 @@ exports_commod %>%
 ###
 
 pop_agemploy_pred <- read_csv('./inputs/pop_agemploy_pred.csv')
+
 ag_an_value %>%
   group_by(scenario, region, year) %>%
   summarize(value = sum(value)) -> agval_region
@@ -131,7 +131,7 @@ ag_an_value %>%
   ungroup() -> totvals
 
 totvals %>%
-  right_join(filter(ag_an_value, GCAM_commodity %in% allcrops),
+  left_join(filter(ag_an_value, GCAM_commodity %in% allcrops),
              by = c("scenario", "region", "year")) %>%
   select(scenario, region, year, GCAM_commodity, value, totval) %>%
   mutate(propval = if_else(totval == 0, 0, value / totval)) %>%
@@ -172,24 +172,10 @@ shareoftop3 %>%
 # 0.3955  0.5335  0.6058  0.6095  0.6596  0.9223
 
 
-rm(
-  totvals,
-  proportions,
-  agval_region,
-  exports_commod,
-  prod_trade,
-  nontrade,
-  tradesect,
-  exports_agan,
-  regions2,
-  all_traded,
-  regions1,
-  ag_commod,
-  an_commod,
-  agprice,
-  anprice,
-  anprod
-)
+rm(totvals,proportions, agval_region, exports_commod,
+   prod_trade, nontrade, tradesect, exports_agan,
+   regions2, all_traded, regions1, ag_commod,
+   an_commod, agprice, anprice, anprod)
 
 
 
