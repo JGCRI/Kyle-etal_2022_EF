@@ -1,5 +1,8 @@
+# Produces indicators on regional level. region_vals.csv is being used in
+# plotting most of the figures (especially 3 and 4 in the manuscript)
 
-source("R/proj_load.R")
+
+#source("R/proj_load.R")
 source("R/landuse.R")
 source("R/nutbal.R")
 source("R/water.R")
@@ -74,6 +77,7 @@ GCAMreg %>% rename("GCAM_30_re"=GCAM_region_ID) %>%
   )) %>%
   as.data.frame() -> regions_data
 
+# this takes a while to run
 region_shape <- merge(regions, regions_data)
 
 negvals<-region_shape %>% filter(variable %in% c("TROP","RSE","AGDP")) %>%
@@ -98,7 +102,7 @@ GCAMreg %>% rename("GCAM_30_re"=GCAM_region_ID) %>%
   #mutate(scenario_long=recode(scenario, PotYld_Diet="Combination", Reference45="Emissions reduction", PotYld="Potential Yield", DietaryTransition="Dietary Transition")) %>%
   as.data.frame() -> share_plot
 
-share_shape<-merge(regions, share_plot)
+share_shape <- merge(regions, share_plot)
 
 
 
@@ -114,7 +118,7 @@ for(scen in unique(region_vals$scenario)){
     tm_fill("value",title="TOP",palette=rygvals)+
     tm_layout(title=scenario_name)
   filename=paste("2050_TOP",scen,sep='_')
-  tmap_save(map,filename = paste0('./figures/maps_new/',filename,'.png'))
+  tmap_save(map, filename = paste0('./figures/maps_new/',filename,'.png'))
 }
 
 ##

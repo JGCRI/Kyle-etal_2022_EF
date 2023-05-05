@@ -2,10 +2,10 @@
 
 # v2: only 5 scenarios
 
-library(RColorBrewer)
+# library(RColorBrewer)
 
 
-gcam_home = "/Users/niaz981/Downloads/Modelling/GCAM/gcam_learning/gcam-core/"
+# gcam_home = "/Users/niaz981/Downloads/Modelling/GCAM/gcam_learning/gcam-core/"
 metaregions <- read_csv('inputs/metaregions.csv')
 #metaregionID <- data.frame(mr2 = unique(metaregions$mr2), GCAM_region_ID = c(1,2,3,6,7,10,11,12))
 metaregionID <- data.frame(mr2 = unique(metaregions$mr2), GCAM_region_ID = c(1,2,3,4,5,6,7,8)) %>%
@@ -161,7 +161,6 @@ radarSAM<-function(df,yr,reg){
 radarSAM(vals_spider, 2050,2)
 
 # all regions: make regions string, for region in regions plot and save in a list and arrange, years 2020, 2050, 2100
-
 plot_years <- c(2020, 2050, 2100)
 plot_ids <- c(GCAMreg$GCAM_region_ID)
 
@@ -220,7 +219,8 @@ for (id in plot_ids_mr){ #plot_ids_mr[1:2]
   }
 }
 
-# metaregions panels
+# metaregions panels ----
+# This is what's in the manuscript. Manually create the folders
 for (id in plot_ids_mr){ #plot_ids[1:2]
   mypath <- file.path("figures","spiders", "metaregions_yr_panels" ,paste(metaregionID$mr2[id],".png", sep = ""))
   png(file=mypath, width = 1500, height = 500, res = 160)
@@ -253,6 +253,9 @@ dev.off()
 radarSAM(vals_spider, 2050,2)
 legend(x=-2.5,y=-1.1, legend = c("REF","YLD","FLX","CO2","YLD_FLX_CO2"), bty = "n", pch=20 ,  horiz = TRUE, col=colors_border)
 
+
+
+# Old code, most probably isn't used anymore
 
 ###
 # scores

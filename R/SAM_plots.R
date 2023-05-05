@@ -1,8 +1,8 @@
-#library(tidyverse)
-library(sf)
-#library(tmap)
+# library(tidyverse)
+# library(sf)
+# library(tmap)
 
-source("R/proj_load.R")
+#source("R/proj_load.R")
 source("R/landuse.R")
 source("R/nutbal.R")
 source("R/water.R")
@@ -112,7 +112,7 @@ popfrac <- colorplot %>%
 
 popfrac
 
-#ggsave("fraction_thresholds_population_v1.png", popfrac, path = 'figures/', width = 11.25, height = 15, units = 'in', dpi = 200)
+#ggsave("figure3_fraction_thresholds_population_v1.png", popfrac, path = 'figures/', width = 11.25, height = 15, units = 'in', dpi = 200)
 
 
 # this code does the same thing as above
