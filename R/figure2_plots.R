@@ -104,7 +104,7 @@ global_pop<-getQuery(SAMout,'population by region') %>%
 veg_protein <- c("Legumes", "NutsSeeds", "Soybean")
 staples <- c("Corn", "OtherGrain", "Rice", "RootTuber", "Wheat")
 other_crops <- cropsnobio[!cropsnobio %in% c(veg_protein, staples, animals)]
-diet_2050 <- foodcons %>%
+diet_2100 <- foodcons %>%
   mutate(category = if_else(technology %in% veg_protein, "Veg protein",
                             if_else(technology %in% animals, "Animal",
                                     if_else(technology %in% staples, "Staples", "Other crops")))) %>%
@@ -112,26 +112,26 @@ diet_2050 <- foodcons %>%
   summarise(Pcal = sum(value)) %>%
   ungroup() %>%
   filter((year == 2015 & scenario == "REF") |
-           year == 2050,
+           year == 2100,
          scenario %in% Fig2_scenarios) %>%
   left_join(global_pop, by = c("scenario", "year")) %>%
   mutate(kcal_cap_d = Pcal * 1e9 / pop / 365,
          scenario = factor(paste(year, scenario),
-                           levels = c("2015 REF", "2050 REF", "2050 YLD", "2050 FLX", "2050 CO2"))) %>%
+                           levels = c("2015 REF", "2100 REF", "2100 YLD", "2100 FLX", "2100 CO2"))) %>%
   select(scenario, category, year, kcal_cap_d)
 
 # Ancillary calculations for Figure 2c
 print(paste0("FLX veg protein increase from REF: ",
-             round(diet_2050$kcal_cap_d[diet_2050$scenario == "2050 FLX" & diet_2050$category == "Veg protein"] /
-                     diet_2050$kcal_cap_d[diet_2050$scenario == "2050 REF" & diet_2050$category == "Veg protein"] - 1,
+             round(diet_2100$kcal_cap_d[diet_2100$scenario == "2100 FLX" & diet_2100$category == "Veg protein"] /
+                     diet_2100$kcal_cap_d[diet_2100$scenario == "2100 REF" & diet_2100$category == "Veg protein"] - 1,
                    digits = 3)))
 print(paste0("FLX veg protein increase from REF: ",
-             round(diet_2050$kcal_cap_d[diet_2050$scenario == "2050 FLX" & diet_2050$category == "Animal"] /
-                     diet_2050$kcal_cap_d[diet_2050$scenario == "2050 REF" & diet_2050$category == "Animal"] - 1,
+             round(diet_2100$kcal_cap_d[diet_2100$scenario == "2100 FLX" & diet_2100$category == "Animal"] /
+                     diet_2100$kcal_cap_d[diet_2100$scenario == "2100 REF" & diet_2100$category == "Animal"] - 1,
                    digits = 3)))
 
 # Generate Figure 2c
-c <- ggplot(diet_2050, aes(x = scenario, y = kcal_cap_d)) +
+c <- ggplot(diet_2100, aes(x = scenario, y = kcal_cap_d)) +
   geom_bar(stat = "identity", aes(fill = category), alpha=1) +
   scale_fill_brewer(palette = "Spectral") +
   #scale_fill_manual(values = c("red2","forestgreen","dodgerblue2","purple")) +
