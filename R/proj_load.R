@@ -78,3 +78,11 @@ gdp_deflator <- function(year, base_year) {
   as.vector(unlist(gdp[as.character(year)] / gdp[as.character(base_year)]))
 }
 
+# Taiwan is a GCAM region but its available agricultural data in FAOSTAT are not complete enough to allow this analysis
+no_SAM_regions <- "Taiwan"
+
+
+
+
+
+

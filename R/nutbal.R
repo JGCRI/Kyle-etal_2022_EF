@@ -10,12 +10,14 @@ nfix<-read_csv("inputs/Nfix_commod_region.csv") %>%
   filter(Nfixkg.yld>0)
 
 # This /inputs/ data file contains scenario-specific information; needs to be re-generated in inputs/R/manure_fraction.R if new scenarios are used
-nonfertN<-read_csv('./inputs/nonfertN.csv')
+nonfertN<-read_csv('./inputs/nonfertN.csv') %>%
+  filter(!region %in% no_SAM_regions)
 
 ####
 # Read in GCAM outputs from .dat file; process and combine for i/o relationships
 ###
 landbycrop<-getQuery(SAMout,"land allocation by crop") %>%
+  filter(!region %in% no_SAM_regions) %>%
   mutate(landleaf = sub("C4|Tree", "", landleaf))
 
 crops_all<-landbycrop %>% filter(landleaf %in% allcrops, year %in% modelfuture) %>%
@@ -24,16 +26,19 @@ crops_all<-landbycrop %>% filter(landleaf %in% allcrops, year %in% modelfuture) 
   ungroup()
 
 Nfertcons<-getQuery(SAMout,"fertilizer consumption by crop type")%>%
-  filter(sector != "Exports_fertilizer") %>%
+  filter(!region %in% no_SAM_regions,
+         sector != "Exports_fertilizer") %>%
   select(scenario,region,sector,year,value) %>%
   rename("GCAM_commodity"=sector,"NfertMt"=value)
 
 Pfertcons<-getQuery(SAMout,"P_fertilizer consumption by crop type") %>%
+  filter(!region %in% no_SAM_regions) %>%
   select(scenario,region,sector,year,value) %>%
   rename("GCAM_commodity"=sector,"PfertMt"=value)
 
 cropprod<-getQuery(SAMout,"ag production by crop type")%>%
-  filter(!output%in%c("Forest","Pasture")) %>%
+  filter(!region %in% no_SAM_regions,
+         !output%in%c("Forest","Pasture")) %>%
   select(scenario,region,output,year,value) %>%
   rename("GCAM_commodity"=output)
 

@@ -14,7 +14,9 @@ scenario_colors <- c(REF = 'black',
 #scale_color_manual(values = c("red2","forestgreen","dodgerblue2","purple")) +
 
 # comes from landuse.R but just in case
-# landbycrop<-getQuery(SAMout,"land allocation by crop")  %>%   mutate(landleaf = sub("C4|Tree", "", landleaf))
+# landbycrop<-getQuery(SAMout,"land allocation by crop") %>%
+#    filter(!region %in% no_SAM_regions) %>%
+#    mutate(landleaf = sub("C4|Tree", "", landleaf))
 
 
 # Figure 2a: total global cropland by scenario
@@ -95,8 +97,10 @@ b
 #ggsave("figures/figure2b.png", height = 3.5, width = 3, units = "in")
 
 # Figure 2c: kcal/pers/d by scenario and food commodity class
-foodcons<-getQuery(SAMout,'food consumption by type (specific)')
+foodcons<-getQuery(SAMout,'food consumption by type (specific)') %>%
+  filter(!region %in% no_SAM_regions)
 global_pop<-getQuery(SAMout,'population by region') %>%
+  filter(!region %in% no_SAM_regions) %>%
   group_by(scenario, year) %>%
   summarise(pop = sum(value)) %>%
   ungroup()
@@ -153,7 +157,8 @@ c
 
 # Figure 2d: N fertilizer consumption by scenario
 Nfert_global <- getQuery(SAMout, "fertilizer consumption by crop type") %>%
-  filter(sector != "Exports_fertilizer",
+  filter(!region %in% no_SAM_regions,
+         sector != "Exports_fertilizer",
          scenario %in% Fig2_scenarios,
          year %in% modelfuture_5y) %>%
   group_by(scenario, year) %>%

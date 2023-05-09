@@ -1,5 +1,6 @@
 
 landbycrop<-getQuery(SAMout,"land allocation by crop") %>%
+  filter(!region %in% no_SAM_regions) %>%
   mutate(landleaf = sub("C4|Tree", "", landleaf))
 
 cropland2015<-landbycrop %>% filter(landleaf %in% allcrops,

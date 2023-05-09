@@ -18,6 +18,7 @@
 
 # comes from landuse.R but just in case
 # landbycrop<-getQuery(SAMout,"land allocation by crop")  %>%
+#     filter(!region %in% no_SAM_regions) %>%
 #     mutate(landleaf = sub("C4|Tree", "", landleaf))
 
 #ag land including pasture
@@ -27,8 +28,9 @@ landbycrop %>%
   summarize(agland=sum(value)*1e5) ->agland_ha
 
 # GHGs from ag
-nonco2<-getQuery(SAMout,"nonCO2 emissions by sector") %>%
-  filter(sector %in% c(allcrops,animals,otheragsector))
+nonco2<-getQuery(SAMout,"nonCO2 emissions by sector")  %>%
+  filter(!region %in% no_SAM_regions,
+         sector %in% c(allcrops,animals,otheragsector))
 
 nonco2 %>%
   mutate(ghg=substr(ghg,1,3)) %>%
@@ -48,7 +50,8 @@ nonco2_totals %>%
 
 # CO2
 co2sector <- getQuery(SAMout,"CO2 emissions by sector (no bio)") %>%
-  filter(sector %in% c(allcrops, animals))
+  filter(!region %in% no_SAM_regions,
+         sector %in% c(allcrops, animals))
 
 co2sector %>%
   group_by(scenario,region, year) %>%
