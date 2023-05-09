@@ -6,7 +6,8 @@ nfix<-read_csv("inputs/Nfix_commod_region.csv") %>%
   select(GCAM_commodity,GCAM_region_ID,Nfixkg.yld) %>%
   filter(Nfixkg.yld>0)
 
-land_detail<-getQuery(SAMout,"detailed land allocation")
+land_detail<-getQuery(SAMout,"detailed land allocation") %>%
+  filter(!region %in% no_SAM_regions)
 
 land_detail %>%
   separate(landleaf,c('GCAM_commodity','GLU_name','irr','mgt')) %>%
@@ -22,7 +23,8 @@ write_csv(land_crop_basin, 'outdata/land_crop_basin.csv')
 # land_crop_basin<- read_csv('outdata/land_crop_basin.csv')
 
 
-Nfert_basin<-getQuery(SAMout,"fertilizer consumption by ag tech")
+Nfert_basin<-getQuery(SAMout,"fertilizer consumption by ag tech") %>%
+  filter(!region %in% no_SAM_regions)
 
 Nfert_basin %>%
   separate(subsector, c('GCAM_commodity','GLU_name')) %>%
@@ -36,7 +38,8 @@ write_csv(Nfert_crop_basin, 'outdata/Nfert_crop_basin.csv')
 #Nfert_crop_basin <- read_csv('outdata/Nfert_crop_basin.csv')
 
 
-Pfert_basin<-getQuery(SAMout,"P fertilizer consumption by ag tech")
+Pfert_basin<-getQuery(SAMout,"P fertilizer consumption by ag tech") %>%
+  filter(!region %in% no_SAM_regions)
 
 Pfert_basin %>%
   separate(subsector,c('GCAM_commodity','GLU_name')) %>%
@@ -49,7 +52,8 @@ write_csv(Pfert_crop_basin, 'outdata/Pfert_crop_basin.csv')
 # Alternatively, read from saved CSV file in the outdata folder
 # Pfert_crop_basin<-read_csv('outdata/Pfert_crop_basin.csv')
 
-cropprod_basin<-getQuery(SAMout,"ag production by subsector (land use region)")
+cropprod_basin<-getQuery(SAMout,"ag production by subsector (land use region)") %>%
+  filter(!region %in% no_SAM_regions)
 
 cropprod_basin%>%
   filter(!output%in%c("Forest","Pasture")) %>%
@@ -175,7 +179,8 @@ forest_change <- land_det %>%  filter(grepl("Forest", GCAM_commodity)) %>%
          variable = "LCC") %>%
   select(scenario, GLU_name, year, variable, Unit, value)
 
-nonco2<-getQuery(SAMout, "nonCO2 emissions by subsector")
+nonco2<-getQuery(SAMout, "nonCO2 emissions by subsector") %>%
+  filter(!region %in% no_SAM_regions)
 
 nonco2 %>% filter(sector %in% allcrops) %>%
   separate(subsector,c('GCAM_commodity','GLU_name'),sep="_") %>%

@@ -1,10 +1,14 @@
 
 # value of agriculture products (incl. animal production and forestry) ----
 
-cropprod <- getQuery(SAMout, "ag production by subsector (land use region)")
-agprice <- getQuery(SAMout, "ag commodity prices")
-anprod <- getQuery(SAMout, "meat and dairy production by tech")
-anprice <- getQuery(SAMout, "meat and dairy prices")
+cropprod <- getQuery(SAMout, "ag production by subsector (land use region)") %>%
+  filter(!region %in% no_SAM_regions)
+agprice <- getQuery(SAMout, "ag commodity prices") %>%
+  filter(!region %in% no_SAM_regions)
+anprod <- getQuery(SAMout, "meat and dairy production by tech") %>%
+  filter(!region %in% no_SAM_regions)
+anprice <- getQuery(SAMout, "meat and dairy prices") %>%
+  filter(!region %in% no_SAM_regions)
 
 cropprod %>% rename("GCAM_commodity" = sector) -> cropprod
 
@@ -38,7 +42,8 @@ ag_commod %>% bind_rows(an_commod) %>%
 ###
 # traded fractions ----
 ###
-tradesect <- getQuery(SAMout, "traded outputs by subsector")
+tradesect <- getQuery(SAMout, "traded outputs by subsector") %>%
+  filter(!region %in% no_SAM_regions)
 #exports from other regions are stored in USA as subsector "[region] traded [commodity]"
 tradesect %>% filter(region == "USA") %>%
   filter(str_detect(sector, 'traded')) %>%

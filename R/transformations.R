@@ -6,7 +6,8 @@
 
 
 # gcam_home = "/Users/niaz981/Downloads/Modelling/GCAM/gcam_learning/gcam-core/"
-metaregions <- read_csv('inputs/metaregions.csv')
+metaregions <- read_csv('inputs/metaregions.csv') %>%
+  filter(!region %in% no_SAM_regions)
 #metaregionID <- data.frame(mr2 = unique(metaregions$mr2), GCAM_region_ID = c(1,2,3,6,7,10,11,12))
 metaregionID <- data.frame(mr2 = unique(metaregions$mr2), GCAM_region_ID = c(1,2,3,4,5,6,7,8)) %>%
   mutate(mr2_cor=recode(mr2, "North_Am"='North America', 'South_Am'='South America', 'E_Asia'='East Asia','SE_Asia'='South East Asia','CS_Asia'='Central South Asia'))# dummy IDs just for plotting, correcting names

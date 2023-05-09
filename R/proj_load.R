@@ -53,7 +53,7 @@ iso_reg <- read_csv(paste0(gcam_home,"input/gcamdata/inst/extdata/common/iso_GCA
 
 
 #modelfuture=seq(2020,2050,by=10)
-modelfuture = seq(2020,2100, by=5)
+modelfuture = seq(2020,2100, by=10)
 
 gdp_deflator <- function(year, base_year) {
   # This time series is the BEA "A191RD3A086NBEA" product
@@ -77,4 +77,12 @@ gdp_deflator <- function(year, base_year) {
 
   as.vector(unlist(gdp[as.character(year)] / gdp[as.character(base_year)]))
 }
+
+# Taiwan is a GCAM region but its available agricultural data in FAOSTAT are not complete enough to allow this analysis
+no_SAM_regions <- "Taiwan"
+
+
+
+
+
 

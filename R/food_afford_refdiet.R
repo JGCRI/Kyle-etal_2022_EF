@@ -1,5 +1,6 @@
 
-foodcons<-getQuery(SAMout,'food consumption by type (specific)')
+foodcons<-getQuery(SAMout,'food consumption by type (specific)') %>%
+  filter(!region %in% no_SAM_regions)
 ref_diet<-read_csv('inputs/Ref_diet.csv')
 income1q<-read_csv('inputs/income_1q.csv')
 
