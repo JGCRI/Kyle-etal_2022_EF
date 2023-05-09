@@ -33,10 +33,12 @@ colors_border=c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00") # set1 5 
 
 
 # add already written data
-region_vals <- read_csv('./outdata/region_vals_5scen.csv')
+region_vals5 <- read_csv('./outdata/region_vals_5scen.csv')
+# region_vals <- read_csv('./outdata/region_vals.csv') %>%
+  filter(scenario == c("CO2", "FLX", "REF", "YLD", "YLD_FLX_CO2"))
 SAMthresh <- read_csv('outdata/SAM_thresholds.csv')
 
-region_vals %>%  select(-Unit) %>%
+region_vals5 %>%  select(-Unit) %>%
   pivot_wider(names_from = variable, values_from = value)  -> varswide
 
 
@@ -192,7 +194,7 @@ for (id in plot_ids){ #plot_ids[1:2]
   dev.off()
 }
 
-# plot for meta regions: transform data to generate new indicators,
+# plot for meta regions: transform data to generate new indicators ----
 
 vals_spider %>% left_join(metaregions, by = "GCAM_region_ID") %>%
 pivot_longer(cols=c(SUSI,Psur,Nsur,LCC,GHG,AGDP,TROP,RSH,RSE),

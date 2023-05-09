@@ -142,7 +142,8 @@ proportions %>%
   group_by(scenario, region, year) %>%
   summarize(value = sum(indexval, na.rm = T) * (-1)) %>%
   mutate(variable = "Hindex", Unit = "--") %>%
-  select(scenario, region, year, variable, value, Unit) ->
+  select(scenario, region, year, variable, value, Unit) %>%
+  ungroup() ->
   Hindex
 
 
@@ -152,9 +153,10 @@ ag_an_value %>%
   group_by(scenario, region, year) %>%
   top_n(n = 3, wt = value) %>%
   group_by(scenario, region, year) %>%
-  summarize(topval = sum(value)) -> top3
+  summarize(topval = sum(value)) %>%
+  ungroup() -> top3
 
-totvals %>% left_join(top3) %>%
+totvals %>% left_join(top3, by = c("scenario", "region", "year")) %>%
   mutate(top3frac = topval / totval) -> shareoftop3
 
 

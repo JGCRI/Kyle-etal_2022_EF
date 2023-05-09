@@ -9,7 +9,7 @@ scenario_colors <- c(REF = 'black',
                      CO2 = 'skyblue1')
 
 # overwrite model future years only for this script to make the curves more smooth
-# modelfuture=seq(2020,2100,by=5)
+# modelfuture_5y=seq(2020,2100,by=5)
 
 #scale_color_manual(values = c("red2","forestgreen","dodgerblue2","purple")) +
 
@@ -20,7 +20,7 @@ scenario_colors <- c(REF = 'black',
 # Figure 2a: total global cropland by scenario
 total_cropland <- filter(landbycrop, landleaf %in% allcrops,
                          scenario %in% Fig2_scenarios,
-                         year %in% modelfuture) %>%
+                         year %in% modelfuture_5y) %>%
   group_by(scenario, year) %>%
   summarise(value = sum(value) / 1000) %>%
   ungroup()
@@ -66,7 +66,7 @@ forcing <- read_csv("inputs/forcing_total.csv", skip = 1) %>%
   select(-region, -`forcing-total`, -Units) %>%
   gather(key = "year", value = "value", -scenario) %>%
   mutate(year = as.integer(year)) %>%
-  filter(year %in% modelfuture)
+  filter(year %in% modelfuture_5y)
 
 # Ancillary calculations for Figure 2b
 print(paste0("FLX radiative forcing delta: ",
@@ -155,7 +155,7 @@ c
 Nfert_global <- getQuery(SAMout, "fertilizer consumption by crop type") %>%
   filter(sector != "Exports_fertilizer",
          scenario %in% Fig2_scenarios,
-         year %in% modelfuture) %>%
+         year %in% modelfuture_5y) %>%
   group_by(scenario, year) %>%
   summarise(value = sum(value)) %>%
   ungroup()

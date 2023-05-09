@@ -70,7 +70,7 @@ ref_cost<-grains %>% bind_rows(meat) %>% bind_rows(otherfood) %>%
 
 ref_cost %>%
     group_by(scenario,region,year) %>%
-    summarize(cost_year=sum(cost_year, na.rm=T)) %>% #NA vals are e.g. Pork in Pakistan
+    summarize(cost_year=sum(cost_year, na.rm=T)) %>% #NA vals are e.g. Pork in Pakistan, and Rice in Taiwan
     left_join(income1q,by = c("region", "year")) %>%
     filter(year %in% modelfuture) %>%
     mutate(value=gdpcap1q/cost_year) %>%
