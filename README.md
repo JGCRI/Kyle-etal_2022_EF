@@ -16,7 +16,7 @@ Page Kyle<sup>1\*</sup>, Mary Ollenburger<sup>2</sup>, Xin Zhang<sup>2</sup>, Ha
 In this paper sustainable agriculture matrix (SAM) is estimated to 2100 using Global Change Analysis Model (GCAM). We model combinatorial variations of yield intensification, dietary shift, and greenhouse gas mitigation scenarios. Findings include scenarios having significant tradeoffs across multiple environmental, economic, and social dimensions. Assessment of these multi-dimensional tradeoffs in a consistent framework improves the quality of information for decision-making.
 
 ## Journal reference
-To be provided after publication. 
+Kyle, P., Ollenburger, M., Zhang, X., Niazi, H., Durga, S., & Ou, Y. (2023). Assessing multi-dimensional impacts of achieving sustainability goals by projecting the sustainable agriculture matrix into the future. _Earth's Future_, 11(10), e2022EF003323. https://doi.org/10.1029/2022EF003323 
 
 ## Code reference
 Code reference for the post-processing module. See release details. Include code citation, see meta repo as a reference and guidance on release and code citations. 
